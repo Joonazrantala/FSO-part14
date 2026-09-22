@@ -2,7 +2,6 @@ import { eq } from "drizzle-orm"
 import { db } from "../../db"
 import { blogs } from "../../db/schema"
 
-let nextId = 3
 
 export const getBlogs = async () => {
     return db.query.blogs.findMany()
