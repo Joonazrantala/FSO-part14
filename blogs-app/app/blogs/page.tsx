@@ -1,4 +1,3 @@
-import { likeBlog } from "../actions/blogs"
 import { getBlogs } from "../services/blogs"
 import Link from "next/link"
 
