@@ -1,18 +1,26 @@
 "use client"
 
 import { registerUser, FormState } from "../actions/users"
-import { useActionState } from "react"
+import { useActionState, useEffect } from "react"
+import {useRouter} from "next/navigation"
+import { useNotification } from "../components/NotificationContext"
 
 const RegisterUser = () => {
   const initialState: FormState = {
     errors: {},
-    values: {
-      username: "",
-      name: "",
-      password: ""
-    }
+    success: false
   }
+
   const [state, formAction] = useActionState(registerUser, initialState)
+  const { showNotification } = useNotification()
+  const router = useRouter()
+
+   useEffect(() => {
+      if (state.success) {
+        showNotification("User created")
+        router.push("/login")
+      }
+    }, [state, showNotification, router])
 
   return (
     <div>

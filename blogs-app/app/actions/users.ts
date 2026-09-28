@@ -18,6 +18,7 @@ export type FormState = {
     name?: string,
     password?: string
   }
+  success: boolean
 }
 
 export const registerUser = async (prevState: FormState, formData: FormData) => {
@@ -51,13 +52,13 @@ export const registerUser = async (prevState: FormState, formData: FormData) => 
   }
 
   if (Object.keys(errors).length > 0) {
-    return { errors, values: { username, name, password } }
+    return { errors, values: { username, name, password }, success: false }
   }
 
   const passwordHash = await bcrypt.hash(password, 10)
 
   await db.insert(users).values({ username, name, passwordHash })
-  
+
   revalidatePath("/login")
-  redirect("/login")
+  return {success: true}
 }

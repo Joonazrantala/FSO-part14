@@ -15,7 +15,8 @@ export type FormState = {
     title: string
     author: string
     url: string
-  }
+  },
+  success?: boolean
 }
 
 export const createBlog = async (prevState: FormState, formData: FormData) => {
@@ -49,12 +50,12 @@ export const createBlog = async (prevState: FormState, formData: FormData) => {
   const likes = Number(formData.get("likes"))
 
   if (Object.keys(errors).length > 0) {
-    return { errors, values: { title, author, url } }
+    return { errors, values: { title, author, url }, success: false }
   }
 
   await addBlog(title, author, url, likes)
   revalidatePath("/blogs")
-  redirect("/blogs")
+  return {success: true}
 }
 
 export const likeBlog = async (formData: FormData) => {

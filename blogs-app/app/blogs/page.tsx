@@ -11,8 +11,8 @@ const Blogs = async ({
   const blogs = title  ? allBlogs.filter(b => b.title.toLowerCase().includes(title?.toLowerCase())) : allBlogs
 
   return (
-    <div>
-      <h2>
+    <div className="max-w-2xl mx-auto p-6">
+      <h2 className="text-2xl font-bold mb-4">
         Blogs:
       </h2>
       <div>
@@ -25,7 +25,7 @@ const Blogs = async ({
       </div>
         {blogs.map(blog => (                        
             <li key={blog.id}>
-              <h4><Link href={`/blogs/${blog.id}`}>{blog.title}</Link></h4>
+              <h4><Link href={`/blogs/${blog.id}`} className="border rounded p-1 hover:bg-gray-50">{blog.title}</Link></h4>
                 Author: {blog.author}<br/>
                 Url: {blog.url}<br/>
                 Likes: {blog.likes}<br/>
