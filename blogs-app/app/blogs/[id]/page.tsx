@@ -1,30 +1,35 @@
-import { notFound } from "next/navigation"
-import { getBlogById, addLike } from "../../services/blogs"
-import { likeBlog } from "@/app/actions/blogs"
+import { notFound } from "next/navigation";
+import { getBlogById } from "../../services/blogs";
+import { likeBlog } from "@/app/actions/blogs";
+import { addBlogToReadingList } from "@/app/actions/readingList";
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params
-  const blog = await getBlogById(Number(id))
+  const { id } = await params;
+  const blog = await getBlogById(Number(id));
 
   if (!blog) {
-    notFound()
+    notFound();
   }
 
   return (
     <div>
-      
       <h4>{blog.title}</h4>
-        Author: {blog.author}<br/>
-        Url: {blog.url}<br/>
-        Likes: {blog.likes}<br/>
-        <form action={likeBlog}>
-          <input type="hidden" name="id" value={blog.id} />
-          <button type="submit">
-            Like
-          </button>
-        </form>
+      Author: {blog.author}
+      <br />
+      Url: {blog.url}
+      <br />
+      Likes: {blog.likes}
+      <br />
+      <form action={likeBlog}>
+        <input type="hidden" name="id" value={blog.id} />
+        <button type="submit">Like</button>
+      </form>
+      <form action={addBlogToReadingList}>
+        <input type="hidden" name="id" value={blog.id} />
+        <button type="submit">Add blog to reading list</button>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default BlogPage
+export default BlogPage;

@@ -1,0 +1,11 @@
+node_modules/
+package-lock.json
+.git/
+
+# Media and binaries
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.pdf

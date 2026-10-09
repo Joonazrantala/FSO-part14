@@ -1,17 +1,18 @@
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import { getUserAndBlogs} from "../../services/users"
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getUserAndBlogs } from "../../services/users";
 
-
-const UserPage = async ({ params }: { params: Promise<{ username: string }> }) => {
-
-  const { username } = await params
-  const user = await getUserAndBlogs(username)
+const UserPage = async ({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}) => {
+  const { username } = await params;
+  const user = await getUserAndBlogs(username);
 
   if (!user) {
-    notFound()
+    notFound();
   }
-
 
   return (
     <div>
@@ -26,7 +27,7 @@ const UserPage = async ({ params }: { params: Promise<{ username: string }> }) =
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default UserPage
+export default UserPage;

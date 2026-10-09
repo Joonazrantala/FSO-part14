@@ -1,8 +1,8 @@
-import Link from "next/link"
-import { getUsers } from "../services/users"
+import Link from "next/link";
+import { getUsers } from "../services/users";
 
 const Users = async () => {
-  const users = await getUsers()
+  const users = await getUsers();
   return (
     <div>
       <h2>Users</h2>
@@ -14,7 +14,7 @@ const Users = async () => {
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Users
+export default Users;
