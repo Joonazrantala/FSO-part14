@@ -9,26 +9,26 @@ export default function NavBar() {
   return (
     <nav className="bg-gray-800 text-white px-6 py-3 flex items-center gap-4">
       <Link href="/" className="hover:text-gray-300">
-        Home
+        home
       </Link>
       {" | "}
       <Link href="/blogs" className="hover:text-gray-300">
-        Blogs
+        blogs
       </Link>
       {" | "}
       <Link href="/users" className="hover:text-gray-300">
-        Users
+        users
       </Link>
       {" | "}
       <div className="ml-auto flex items-center gap-4">
         {session ? (
           <>
             <Link href="/me" className="hover:text-gray-300">
-              Me
+              me
             </Link>
             {" | "}
             <Link href="/blogs/new" className="hover:text-gray-300">
-              Create new
+              create new
             </Link>
             {" | "}
             <em>{session.user?.name} logged in</em>{" "}
@@ -42,11 +42,11 @@ export default function NavBar() {
         ) : (
           <>
             <Link href="/login" className="hover:text-gray-300">
-              Login
+              login
             </Link>
             {" | "}
             <Link href="/register" className="hover:text-gray-300">
-              Register
+              register
             </Link>
           </>
         )}

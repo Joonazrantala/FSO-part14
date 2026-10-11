@@ -20,29 +20,35 @@ const Blogs = async ({
       <div>
         <form>
           <label>
-            <input type="text" name="title"></input>
+            <input type="text" name="title" data-testid="filter-input"></input>
           </label>
-          <button type="submit">Search by title</button>
+          <button type="submit" data-testid="search-button">
+            Search by title
+          </button>
         </form>
       </div>
-      {blogs.map((blog) => (
-        <li key={blog.id}>
-          <h4>
-            <Link
-              href={`/blogs/${blog.id}`}
-              className="border rounded p-1 hover:bg-gray-50"
-            >
-              {blog.title}
-            </Link>
-          </h4>
-          Author: {blog.author}
-          <br />
-          Url: {blog.url}
-          <br />
-          Likes: {blog.likes}
-          <br />
-        </li>
-      ))}
+      <ul data-testid="blogs-list">
+        {blogs.map((blog) => (
+          <li key={blog.id}>
+            <h4>
+              <Link
+                href={`/blogs/${blog.id}`}
+                className="border rounded p-1 hover:bg-gray-50"
+                data-testid="blog-title"
+              >
+                {blog.title}
+              </Link>
+            </h4>
+            <p data-testid="blog-detail">Blog details:</p>
+            <p data-testid="blog-author"> Author: {blog.author}</p>
+            <br />
+            <p>URL: {blog.url}</p>
+            <br />
+            <p>{blog.likes} likes</p>
+            <br />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

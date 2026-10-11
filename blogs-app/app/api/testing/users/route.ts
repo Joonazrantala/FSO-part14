@@ -1,16 +1,16 @@
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 import { db } from "../../../../db";
 import { blogs, users, readingList } from "../../../../db/schema";
 import bcrypt from "bcryptjs";
 
-export const DELETE = async(req: Request) => {
+export const POST = async (req: Request) => {
   if (process.env.NODE_ENV === "production") {
     return NextResponse.json(
       { error: "This endpoint is not available in production" },
       { status: 403 },
-      )
-    }
-  const { username, name, password } = await req.json()
+    );
+  }
+  const { username, name, password } = await req.json();
 
   if (
     typeof username !== "string" ||
@@ -22,23 +22,24 @@ export const DELETE = async(req: Request) => {
   ) {
     return NextResponse.json(
       { error: "Invalid user details" },
-      { status: 400 }
-    )
+      { status: 400 },
+    );
   }
 
-  const passwordHash = await bcrypt.hash(password, 10)
+  const passwordHash = await bcrypt.hash(password, 10);
 
-  const [user] = await db.insert(users)
+  const [user] = await db
+    .insert(users)
     .values({
       username,
       name,
-      passwordHash
+      passwordHash,
     })
     .returning({
       id: users.id,
       username: users.username,
-      name: users.name
-    })
+      name: users.name,
+    });
 
-  return NextResponse.json(user, { status: 201 })
-}
+  return NextResponse.json(user, { status: 201 });
+};

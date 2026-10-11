@@ -15,74 +15,108 @@ const MePage = async () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h1>My profile</h1>
-      <p>
+      <h1 data-testid="user-profile">My profile</h1>
+      <p data-testid="user-name">
         <b>Name:</b> {user?.name}
       </p>
-      <p>
+      <p data-testid="user-username">
         <b>Username:</b> {user?.username}
       </p>
       <div>
         <form action={saveToken}>
-          <h3>API token:</h3>
-          <p>
+          <h3 data-testid="api-token-section">API token:</h3>
+          <div data-testid="token-display">
             {user?.token ? (
-              <>{user.token}</>
+              <p data-testid="api-token">{user.token}</p>
             ) : (
-              <>No token has been generated yet</>
+              <p data-testid="no-token-message">
+                No token has been generated yet
+              </p>
             )}
-          </p>
+          </div>
           <input type="hidden" name="id" value={user?.id} />
-          <button type="submit">Generate a new token</button>
+          <button type="submit" data-testid="generate-token-button">
+            Generate a new token
+          </button>
         </form>
       </div>
-      <h2 className="text-2xl font-bold mb-4">My reading list</h2>
 
-      <h3 className="text-xl font-semibold mb-3">
-        Unread ({unreadBlogs.length})
-      </h3>
-      <ul className="space-y-3 mb-8">
-        {unreadBlogs.map((blog) => (
-          <li
-            key={blog.id}
-            className="flex items-center justify-between p-3 border rounded-lg"
-          >
-            <span>{blog.blog.title}</span>
+      <h2
+        className="text-2xl font-bold mb-4"
+        data-testid="reading-list-section"
+      >
+        My reading list
+      </h2>
 
-            <form action={markBlogAsRead}>
-              <input type="hidden" name="id" value={blog.blog.id} />
-              <button
-                type="submit"
-                className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+      {readingList.length === 0 ? (
+        <p
+          data-testid="empty-reading-list"
+          className="text-gray-500 italic mb-6"
+        >
+          Your reading list is empty.
+        </p>
+      ) : (
+        <>
+          <h3 className="text-xl font-semibold mb-3">
+            Unread ({unreadBlogs.length})
+          </h3>
+          <ul className="space-y-3 mb-8" data-testid="unread-section">
+            {unreadBlogs.length === 0 ? (
+              <li
+                data-testid="no-unread-blogs"
+                className="text-gray-500 italic"
               >
-                Mark as read
-              </button>
-            </form>
-          </li>
-        ))}
-      </ul>
-      <h3 className="text-xl font-semibold mb-3">Read ({readBlogs.length})</h3>
+                No unread blogs
+              </li>
+            ) : (
+              unreadBlogs.map((blog) => (
+                <li
+                  key={blog.id}
+                  className="flex items-center justify-between p-3 border rounded-lg"
+                >
+                  <span>{blog.blog.title}</span>
 
-      <ul className="space-y-3">
-        {readBlogs.map((blog) => (
-          <li
-            key={blog.id}
-            className="flex items-center justify-between p-3 border rounded-lg"
-          >
-            <span>{blog.blog.title}</span>
+                  <form action={markBlogAsRead}>
+                    <input type="hidden" name="id" value={blog.blog.id} />
+                    <button
+                      type="submit"
+                      data-testid={`mark-read-${blog.blog.id}`}
+                      className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                    >
+                      Mark as read
+                    </button>
+                  </form>
+                </li>
+              ))
+            )}
+          </ul>
 
-            <form action={markBlogAsRead}>
-              <input type="hidden" name="id" value={blog.blog.id} />
-              <button
-                type="submit"
-                className="bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700"
+          <h3 className="text-xl font-semibold mb-3">
+            Read ({readBlogs.length})
+          </h3>
+
+          <ul className="space-y-3">
+            {readBlogs.map((blog) => (
+              <li
+                key={blog.id}
+                className="flex items-center justify-between p-3 border rounded-lg"
               >
-                Mark as unread
-              </button>
-            </form>
-          </li>
-        ))}
-      </ul>
+                <span>{blog.blog.title}</span>
+
+                <form action={markBlogAsRead}>
+                  <input type="hidden" name="id" value={blog.blog.id} />
+                  <button
+                    type="submit"
+                    className="bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700"
+                  >
+                    Mark as unread
+                  </button>
+                </form>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 };

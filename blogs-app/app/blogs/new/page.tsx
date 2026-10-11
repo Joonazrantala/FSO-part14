@@ -55,7 +55,7 @@ const NewBlog = () => {
           </div>
           <div>
             <label>
-              Url
+              URL
               <input
                 type="text"
                 name="url"
@@ -70,11 +70,13 @@ const NewBlog = () => {
           <div>
             <label>
               Likes
-              <input type="number" name="likes" required />
+              <input type="number" name="likes" defaultValue={0} required />
             </label>
           </div>
         </div>
-        <button type="submit">Create</button>
+        <button type="submit" data-testid="create-blog-button">
+          Create
+        </button>
       </form>
     </div>
   );

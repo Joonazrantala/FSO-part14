@@ -6,7 +6,6 @@ import { users } from "../../db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { generateAndSaveToken } from "../services/users";
-import { Redirect } from "next";
 
 export type FormState = {
   values?: {
@@ -43,7 +42,6 @@ export const registerUser = async (
   if (existingUser) {
     errors.username = "Username already exists";
   }
-
   const name = (formData.get("name") as string)?.trim();
   if (!name || name.length < 4) {
     errors.name = "Name must be at least 4 characters long";

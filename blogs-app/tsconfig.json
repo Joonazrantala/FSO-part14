@@ -19,7 +19,6 @@
       }
     ],
     "paths": {
-      
       "@/*": ["./*"]
     }
   },
@@ -29,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
-, "app/homepage.mdx"  ],
+    "**/*.mts",
+    "app/homepage.mdx"
+  ],
   "exclude": ["node_modules"]
 }

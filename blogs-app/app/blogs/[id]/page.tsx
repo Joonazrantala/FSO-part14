@@ -13,12 +13,15 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <div>
-      <h4>{blog.title}</h4>
-      Author: {blog.author}
+      <h4 data-testid="blog-title">{blog.title}</h4>
+      <h6 data-testid="blog-detail">
+        <u>Blog details:</u>
+      </h6>
+      <span data-testid="blog-author">Author: {blog.author}</span>
       <br />
-      Url: {blog.url}
+      <span data-testid="blog-url">URL: {blog.url}</span>
       <br />
-      Likes: {blog.likes}
+      <span>Likes: {blog.likes}</span>
       <br />
       <form action={likeBlog}>
         <input type="hidden" name="id" value={blog.id} />
@@ -26,7 +29,9 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
       </form>
       <form action={addBlogToReadingList}>
         <input type="hidden" name="id" value={blog.id} />
-        <button type="submit">Add blog to reading list</button>
+        <button type="submit" data-testid="add-to-reading-list-button">
+          Add blog to reading list
+        </button>
       </form>
     </div>
   );
