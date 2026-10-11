@@ -51,6 +51,8 @@ jobs:
           fi
 
       - name: Run database migrations
+        env:
+          NODE_ENV: test
         run: npx drizzle-kit push
 
       - name: Run Playwright tests
