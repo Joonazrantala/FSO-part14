@@ -10,7 +10,10 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-
+    
+    defaults:
+      run:
+        working-directory: ./blogs-app
     steps:
       - uses: actions/checkout@v4
 
